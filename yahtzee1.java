@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.io.*;
 
 public class yahtzee1 {
   public static void main(String [] args) {
@@ -9,15 +10,17 @@ public class yahtzee1 {
     char playAgain ='y';
     while( playAgain == 'y')
     {
-      String testString= {"nnnnn"}; // ask nadra about string and keep being an char
-      char[] keep = testString.toCharArray();
-      int turn = 1;
-      while(turn < 4 && keep != "yyyyy")
+          // String testString= {"nnnnn"}; // ask nadra about string and keep being an char
+    String keep = "nnnnn";    // aks nadra about substring char[] keep = testString.toCharArray();
+
+    int turn = 1;
+    while(turn < 4 && keep != "yyyyy")
+    {
+      for(int dieNumber = 0; dieNumber < DICE_IN_PLAY; dieNumber++)
       {
-        for(int dieNumber = 0; dieNumber < DICE_IN_PLAY; dieNumber++)
-        {
-          if(keep[dieNumber] !='y')
-            hand[dieNumber] = 5; // Stopped on line 32 of the .cpp file
+        if(keep.substring(dieNumber, dieNumber+1).charAt(0) != 'y')
+        //  System.out.println(keep + "This is keep");
+        hand[dieNumber] = rollDie(); // Stopped on line 32 of the .cpp file
         }
         System.out.println("Your roll was: ");
         for (int dieNumber = 0; dieNumber < DICE_IN_PLAY; dieNumber++)
@@ -52,7 +55,7 @@ public class yahtzee1 {
       }
       if (maxOfAKindFound(hand) >= 3)
       {
-        System.out.println("Score " + totalAllDice(hand) << " on the ");
+        System.out.println("Score " + totalAllDice(hand) + " on the ");
         System.out.println("3 of a Kind line");
       }
       else
@@ -87,18 +90,18 @@ public class yahtzee1 {
       System.out.println("Score 0 on the Yahtzee line");
       System.out.println("Score " + totalAllDice(hand) +" on the ");
       System.out.println("Chance line");
-      Scanner scan = new Scanner(System.in);
+    //Scanner scan = new Scanner(System.in);
       System.out.print("\n Enter 'y' to play again "); //is this corre
-      playAgain= scan.nextInt();
+      playAgain = scan.next().charAt(0);
     }
-  return 0;
   }
 }
 
   public static int rollDie()
 //this function simulates the rolling of a single die
   {
-  int roll = rand() % 6 + 1;
+  Random rand = new Random();
+  int roll = rand.nextInt(6)+1;
   return roll;
   }
   public static int maxOfAKindFound(int hand[])
