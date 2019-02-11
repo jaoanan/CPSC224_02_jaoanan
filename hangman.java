@@ -45,7 +45,7 @@ public class hangman {
       }
       else{}
     }
-
+\
     displayArray(findWord);
 
   }
@@ -83,16 +83,33 @@ public class hangman {
 else{}
 
 //displays the char array
-
-
-
-
-
+//accepts an int and creates a char array of that size Then it
+ //sets each element in the array to an underscore '_' Then it returns the
+// char array.
+   
+size = 27;
+char[] alphabet(int size) {
+char[] charArray = new char[size];
+for (int i = 0; i < charArray.length; i++)
+charArray[i] = '_';
+return charArray;
+}
 
   //  char[] alphabet = new char[27];
     //initializeAlphabet(alphabet);
     //displayAlphabet(alphabet);
   }
+//if it exceeds max tries   
+if(strikes == MAX_TRIES )
+	{
+		system.out.println("\nSorry, you lose...you've been hanged.");
+		system.out.println("The word was : " + word );
+  else 
+  { 
+    system.out.println ("You win! Congrats");
+    
+  }
+    
 
   public static void incorrect( boolean correct, int[] strikes)
   {
@@ -206,6 +223,7 @@ else{}
 /*
   public static void initializeAlphabet( char[] alphabet)
   {
+  qqqqqqqqqqqqqqqqqq
     int x = 0;
     for (char i = 'a'; i <= 'z'; i++)
     {
