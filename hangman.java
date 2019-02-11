@@ -9,6 +9,7 @@ public class hangman {
     String[] words = new String[]
     { "hello", "encyclopedia","flamingo", "cellphone" };
 
+    boolean validString;
     int menuChoice;
     int length = 0;
     int[] strikes = new int[] {0};
@@ -17,6 +18,8 @@ public class hangman {
     int maxTries = 6;
     boolean correct = true;
     boolean win = false;
+    boolean validInpt = true;
+
 // System.out.println (menuChoice);
 //    menuChoice =2;
 
@@ -43,9 +46,15 @@ public class hangman {
 
       while(strikes[0] != maxTries && win == false)
       {
-        guess=inptGuess();
+        do
+        {
+          guess=inptGuess();
+          validInpt = validCharInput(guess);
+        }while(!validInpt);
+        guess = convertLetter(guess);
+
         correct = compareGuess(word, findWord, length, guess);
-        wrongGuess(findWord, strikes, correct, length);
+        wrongGuess(findWord, strikes, correct, length, maxTries);
         win = checkWin(findWord, length);
       }
       gameResult(strikes, win, rndmString, maxTries);
@@ -56,8 +65,11 @@ public class hangman {
      {
        //selects the string
         String inptStrng;
+        do
+        {
         inptStrng = userString();
-
+        validString = validInput(inptStrng);
+        } while(!validString);
         //converts string array to character
         length = lengthString(inptStrng);
         char[] word2 = new char[length];
@@ -72,9 +84,15 @@ public class hangman {
         displayArray(findWord, length);
         while(strikes[0] != maxTries && win ==false)
         {
-        guess=inptGuess();
+        do
+        {
+          guess=inptGuess();
+          validInpt = validCharInput(guess);
+        }while(!validInpt);
+        guess = convertLetter(guess);
+
         correct = compareGuess(word2, findWord, length, guess);
-        wrongGuess(findWord, strikes, correct, length);
+        wrongGuess(findWord, strikes, correct, length, maxTries);
         win = checkWin(findWord, length);
         }
         gameResult(strikes, win, inptStrng, maxTries);
@@ -84,21 +102,35 @@ else{}
 
 }
 
-  public static void wrongGuess(char[] findWord, int[] strikes, boolean correct, int length)
+  public static void wrongGuess(char[] findWord, int[] strikes, boolean correct, int length, int maxTries)
   {
     if (!correct)
     {
       incorrect (correct, strikes);
-      displayArray(findWord, length);
+      if(strikes[0] < maxTries)
+        displayArray(findWord, length);
     }
     else{
+      JOptionPane.showMessageDialog(null, "Congrats you guessed correctly! \n"
+        + "You have " +strikes[0]+ " strikes");
+
       displayArray(findWord, length);
     }
   }
 
 
 
-
+  public static char convertLetter (char charGuess)
+    {
+      int intGuess = charGuess;
+      if(intGuess < 97)
+      {
+        intGuess += 32;
+        charGuess = (char)intGuess;
+      }
+      else {}
+      return charGuess;
+    }
 
 public static void gameResult(int[] strikes, boolean win, String word, int maxTries)
   {
@@ -114,6 +146,43 @@ public static void gameResult(int[] strikes, boolean win, String word, int maxTr
     }
   }
 
+public static boolean validInput(String input)
+  {
+    boolean validInpt = true;
+    for (int i = 0; i < (input.length()); i++)
+    {
+      if (input.charAt(i) > 96 && input.charAt(i) < 123)
+          validInpt = true;
+      else if (input.charAt(i) > 64 && input.charAt(i) < 91)
+          validInpt = true;
+      else
+        {
+        JOptionPane.showMessageDialog( null, "Enter a valid letter" );
+        validInpt = false;
+        break;
+        }
+    }
+
+    return validInpt;
+  }
+
+  public static boolean validCharInput(char input)
+    {
+      boolean validInpt = true;
+      int intInput = input;
+        if (intInput > 96 && intInput < 123)
+            validInpt = true;
+        else if (intInput > 64 && intInput < 91)
+            validInpt = true;
+        else
+          {
+          JOptionPane.showMessageDialog( null, "Enter a valid letter" );
+          validInpt = false;
+          }
+
+      return validInpt;
+    }
+
 public static boolean checkWin(char[] findWord, int length)
 {
   boolean win;
@@ -128,26 +197,21 @@ public static boolean checkWin(char[] findWord, int length)
   {
     int numStrike = strikes[0];
     strikes[0] = numStrike+1;
-
+    JOptionPane.showMessageDialog (null, "Oh NO! you guessed incorrectly you have "
+      + strikes[0]+ " strikes");
     if (strikes[0] == 1)
-      JOptionPane.showMessageDialog (null,"Oh NO! You guessed incorrectly\n"
-        + " O ");
+      JOptionPane.showMessageDialog (null, " O ");
     else if (strikes[0] == 2)
-      JOptionPane.showMessageDialog (null, "Oh NO! You guessed incorrectly\n"
-        +" O \n"+ " |\n" + " |\n");
+      JOptionPane.showMessageDialog (null," O \n"+ " |\n" + " |\n");
     else if (strikes[0] == 3)
-      JOptionPane.showMessageDialog (null,  "Oh NO! You guessed incorrectly\n"
-        + " O \n"+ "\\|\n" +" |\n" );
+      JOptionPane.showMessageDialog (null, " O \n"+ "\\|\n" +" |\n" );
     else if (strikes[0] == 4)
-      JOptionPane.showMessageDialog (null, "Oh NO! You guessed incorrectly\n"
-        + " O \n"+ "\\|/\n" +" |\n");
+      JOptionPane.showMessageDialog (null, " O \n"+ "\\|/\n" +" |\n");
     else if (strikes[0] == 5)
-      JOptionPane.showMessageDialog (null, "Oh NO! You guessed incorrectly\n"
-        + " O \n"+ "\\|/\n" +" |\n"+"/");
+      JOptionPane.showMessageDialog (null,  " O \n"+ "\\|/\n" +" |\n"+"/");
     else if (strikes[0] == 6)
       {
       JOptionPane.showMessageDialog (null,
-        "Oh NO! You guessed incorrectly\n" +
         " O \n"+ "\\|/\n" +" |\n"+"/"+"\\");
       JOptionPane.showMessageDialog (null, "GAME OVER");
 
@@ -179,7 +243,7 @@ public static boolean checkWin(char[] findWord, int length)
     char charGuess;
     guess = JOptionPane.showInputDialog("What letter do you want to guess");
     charGuess = guess.charAt(0);
-
+/*
     int intGuess = charGuess;
 
     if(intGuess < 97)
@@ -188,6 +252,7 @@ public static boolean checkWin(char[] findWord, int length)
       charGuess = (char)intGuess;
     }
     else {}
+    */
     return charGuess;
   }
 
