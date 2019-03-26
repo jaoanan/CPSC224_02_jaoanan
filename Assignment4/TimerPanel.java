@@ -304,15 +304,19 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
          g.fillOval(sunX,sunY, radius, radius);
          setBackground(Color.lightGray);
          drawAirplane(g);
+         //5 implementation airplane timerstarts 
          timer.start();
        }
        else
        {
          //night
+         //7 implementation sun changes to moon 
          g.setColor(Color.WHITE);
          g.fillOval(sunX,sunY, radius, radius);
+         //8 implementation Background setto black
          setBackground(Color.black);
          drawStars(g);
+         //6 implementation shooting star
          timer.start();
        }
 
@@ -350,7 +354,7 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
       if (mouseClicked % 2 == 0) time = 0;
       else time = 1;
       repaint();
-      System.out.println(e.getX() + " "+ e.getY());
+      //System.out.println(e.getX() + " "+ e.getY());
     }
 
     public void mouseClicked(MouseEvent e)
@@ -366,19 +370,20 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
 
     public void mouseEntered(MouseEvent e)
     {
+    //Implementation 9 There is snow if mouse is within screen
       entered = true;
-
     }
 
     public void mouseExited(MouseEvent e)
     {
-
+      //3 implementation resets screen
       reset();
       repaint();
     }
    public void mouseDragged (MouseEvent e)
     {
       int i;
+        //2 implementation birds fly to grass 
         for( i = 0; i< bird1x.length && bird2y[4] <=430; i++)
         {
           bird1x[i]+= 2;
@@ -391,6 +396,7 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
     }
    public void mouseMoved(MouseEvent e)
     {
+    //1 implementation animal moves 
       a1 -=1;
       a2-=1;
       a3 -=1;
