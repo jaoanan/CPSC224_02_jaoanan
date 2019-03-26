@@ -1,4 +1,4 @@
-//Joan Aoanan && Aisha Burka
+//Joan Aoanan and Aisha Burka
 import java.awt.event.*;
 import java.awt.Graphics;
 import java.awt.Color;
@@ -8,9 +8,11 @@ import javax.swing.Timer;
 
 public class TimerPanel extends JPanel implements ActionListener, MouseListener, MouseMotionListener
 {
+  //value of the Roof of the house 
   int roofXValues[] = {100, 150, 200};
   int roofYValues[] = {350, 300, 350};
 
+  //Values of the mountains 
   int mountainVal1x[] = {0, 150,300 };
   int mountainVal1y[] = {400, 200, 400};
 
@@ -20,6 +22,7 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
   int mountainVal3x[] = { 100, 250,  400 };
   int mountainVal3y[] = {400, 150, 400};
 
+  //values of the snow of the mountains 
   int snMountainVal1x[] = {75, 150,224 };
   int snMmountainVal1y[] = {300, 200, 300};
 
@@ -32,23 +35,23 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
   int snRoofXValues[] = {125, 150, 174};
   int snRoofYValues[] = {325, 300, 326};
 
+  //Shows if cursor enters the frame
   boolean entered = false;
 
+  //Bird coordinates 
   int bird1x[] = {100,120,140,140,120,100};
   int bird1y[] = {100,103,100,104,108,103};
 
   int bird2x[] = {140,160,180,180,160,140};
   int bird2y[] = {115,117,114,119,122,116};
 
-  private int MouseX;
-  private int MouseY;
-
-
+  //SunCoordinates 
   int origSunX = 420;
   int origSunY = 25;
-
+  
   int sunX=420;
   int sunY=25;
+  
   int mouseClicked = 0;
   int time = 0;
 
