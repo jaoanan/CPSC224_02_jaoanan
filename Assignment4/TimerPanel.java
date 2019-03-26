@@ -51,20 +51,24 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
   
   int sunX=420;
   int sunY=25;
+  int radius= 15;
   
+  //Amounts user click
   int mouseClicked = 0;
   int time = 0;
 
+  //original x coordinates of the airplane
   int x1=7;
   int x2= -10;
   int x3 = -10;
 
-  int radius= 15;
+
   private int delay = 10;
-  //rotected Timer timer;
+  
+  //Protected Timer timer;
   protected int currentX = 0;
   protected int currentY = 0;
-  protected boolean isClicked = false;
+
   private int x = 0;		// x position
   private int y = 0;		// y position
 
@@ -72,11 +76,6 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
   private int dx = 2;		// increment amount (x coord)
   private int dy = 2;		// increment amount (y coord)
 
-  double move1;
-  double move2;
-  double move3;
-
-  protected boolean isDragged = false;
 
   Timer  timer = new Timer(delay, this);
 
@@ -87,12 +86,14 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
   int starXPointsO[] = {9, 15, 0, 18, 3};
   int starYPointsO[] = {0, 18, 6, 6, 18};
 
+  //birds
   int bird1xO[] = {100,120,140,140,120,100};
   int bird1yO[] = {100,103,100,104,108,103};
 
   int bird2xO[] = {140,160,180,180,160,140};
   int bird2yO[] = {115,117,114,119,122,116};
 
+  //Drawing animals 
   int a1 =505;
   int a2= 507;
   int a3 = 518;
@@ -102,11 +103,8 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
 
   public TimerPanel()
   {
-
-
     addMouseListener(this);
     addMouseMotionListener(this);
-
   }
 
   public void actionPerformed(ActionEvent e)
@@ -117,19 +115,23 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
 
   public void resetTimers ()
   {
+    //Puts star in orignal spot
     starXPoints = starXPointsO.clone();
     starYPoints = starYPointsO.clone();
-
+    
+    //Puts birds in orignal spot
     bird1x=bird1xO.clone();
     bird1y=bird1yO.clone();
 
     bird2x=bird2xO.clone();
     bird2y=bird2yO.clone();
 
+    //Puts airplane in orignal spot
     x1=7;
     x2= -10;
     x3 = -10;
 
+   //Puts animal in orignal spot
     a1 =505;
     a2= 507;
     a3 = 518;
@@ -161,11 +163,11 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
 
      g.fillOval( x - radius, y - radius , 10, 30);
 */
-   //Sun
+    //Sun
      displayTime(g,sunX, sunY, time);
 
- //grass
-    if(entered)
+     //grass
+    if(entered) //If mouse is within frame there is snow 
     {
       g.setColor(Color.WHITE);
       g.fillRect(0,400, 500, 300);
@@ -178,7 +180,7 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
 
   //Mountains
 
-    if (entered)
+    if (entered) //If mouse is within frame there is snow 
     {
       g.setColor(Color.DARK_GRAY);
       g.fillPolygon(mountainVal3x, mountainVal3y, 3);
@@ -203,7 +205,7 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
 
 
     }
-    else
+    else 
     {
      g.setColor(Color.DARK_GRAY);
      g.fillPolygon(mountainVal3x, mountainVal3y, 3);
@@ -214,10 +216,9 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
      g.setColor(Color.BLUE);
      g.fillPolygon(mountainVal2x, mountainVal2y, 3);
    }
-     //Animal
-    // drawAnimal(g);
+ 
 
-  //house
+  //house //If mouse is within frame there is snow 
     if(entered)
     {
        g.setColor(Color.magenta);
@@ -241,7 +242,7 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
      }
 
   else
-  {
+    {
       g.setColor(Color.magenta);
       g.fillRect(100,350, 100, 50);
       g.setColor(Color.blue);
@@ -259,7 +260,7 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
      g.setColor(Color.DARK_GRAY);
      g.fillPolygon(bird1x, bird1y, 6);
      g.fillPolygon(bird2x, bird2y, 6);
-   }
+ }
 
      public void drawAnimal(Graphics g)
     {
