@@ -350,16 +350,15 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
 
     public void mousePressed(MouseEvent e)
     {
-      mouseClicked++;
-      if (mouseClicked % 2 == 0) time = 0;
-      else time = 1;
-      repaint();
-      //System.out.println(e.getX() + " "+ e.getY());
+     
     }
 
     public void mouseClicked(MouseEvent e)
     {
-
+      mouseClicked++;
+      if (mouseClicked % 2 == 0) time = 0;
+      else time = 1;
+      repaint();
     }
 
     public void mouseReleased(MouseEvent e)
