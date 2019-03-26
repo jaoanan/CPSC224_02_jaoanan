@@ -38,7 +38,7 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
   //Shows if cursor enters the frame
   boolean entered = false;
 
-  //Bird coordinates 
+  //Bird X and Y coordinates 
   int bird1x[] = {100,120,140,140,120,100};
   int bird1y[] = {100,103,100,104,108,103};
 
@@ -380,6 +380,7 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
       reset();
       repaint();
     }
+    //mouseDragged drags the birds across the screen
    public void mouseDragged (MouseEvent e)
     {
       int i;
