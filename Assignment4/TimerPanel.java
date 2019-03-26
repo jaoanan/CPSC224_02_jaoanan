@@ -39,7 +39,6 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
   boolean entered = false;
 
   //Bird coordinates 
-  // X and Y coordinates for both birds
   int bird1x[] = {100,120,140,140,120,100};
   int bird1y[] = {100,103,100,104,108,103};
 
@@ -145,25 +144,7 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
   {
      super.paintComponent(g); // call superclass's paintComponent
      g.setColor(Color.blue);
-
-
-
-     // check for boundaries
-/*
-     if (x < radius)			dx = Math.abs(dx);
-     if (x > getWidth() - radius)	dx = -Math.abs(dx);
-     if (y < radius)			dy = Math.abs(dy);
-     if (y > getHeight() - radius)	dy = -Math.abs(dy);
-
-     // adjust ball position
-     x += dx;
-     y += dy;
-     //g.fillOval(x - radius, y - radius, radius*2, radius*2);
-
-     g.fillOval(x - radius-10, y - radius+10 , 30, 10);
-
-     g.fillOval( x - radius, y - radius , 10, 30);
-*/
+     
     //Sun
      displayTime(g,sunX, sunY, time);
 
@@ -300,10 +281,10 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
        //sun
        sunX = origSunX;
        sunY = origSunY;
-       //sunColor = "yellow";
+
        setBackground(Color.lightGray);
        mouseClicked = 0;
-       //sunColor = "yellow";
+    
        time = 0;
        resetTimers();
        entered = false;
@@ -315,7 +296,7 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
 
        int radius = 45;
 
-       //drawAnimal(g);
+
        if (time == 0)
        {
          //day
@@ -379,7 +360,7 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
 
     public void mouseReleased(MouseEvent e)
     {
-      //repaint();
+
 
     }
 
@@ -398,8 +379,6 @@ public class TimerPanel extends JPanel implements ActionListener, MouseListener,
    public void mouseDragged (MouseEvent e)
     {
       int i;
-
-
         for( i = 0; i< bird1x.length && bird2y[4] <=430; i++)
         {
           bird1x[i]+= 2;
