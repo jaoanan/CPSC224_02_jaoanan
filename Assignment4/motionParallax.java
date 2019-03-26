@@ -13,7 +13,9 @@ public class motionParallax extends JFrame //Calls motionParallax so that the fu
 
   public motionParallax()
   {
+    //Sets the title 
     JFrame frame = new JFrame( "Motion Parallax" );
+    //An action for exiting or closing out the Motion Parallax 
     frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE ); 
     TimerPanel tp = new TimerPanel();
     frame.add(tp);
