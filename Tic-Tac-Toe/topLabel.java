@@ -20,5 +20,6 @@ public class topLabel extends JPanel
     setLayout(new BorderLayout());
     add(player1, BorderLayout.WEST);
     add(player2, BorderLayout.EAST);
+
   }
 }

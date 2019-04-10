@@ -8,10 +8,11 @@ public class P2 extends JPanel
   private JLabel name;
   private JLabel wins;
   private JLabel losses;
-  private JTextField inptWins;
-  private JTextField inptLosses;
-  //private Border border;
-  //private TitledBorder border;
+  private JLabel numWins;
+  private JLabel numLosses;
+  private int intWins;
+  private int intLosses;
+  gridPanel newGridObj = new gridPanel();
 
 
   //constructor
@@ -21,6 +22,8 @@ public class P2 extends JPanel
     setLayout(new GridLayout(3,3));
     setBorder(BorderFactory.createTitledBorder("player 2 (O)"));
 
+    int [] p2 = newGridObj.getP2Array();
+
     name = new JLabel("Name: ");
 
     JTextField inptName = new JTextField(10);
@@ -29,18 +32,37 @@ public class P2 extends JPanel
     wins = new JLabel("Wins: ");
     losses = new JLabel("Losses: ");
 
-    JTextField inptWins = new JTextField(10);
-    inptWins.setEditable(false);
 
-    JTextField inptLosses = new JTextField(10);
-    inptLosses.setEditable(false);
+    intWins =setWins(p2);
+    intLosses = setLosses(p2);
+
+    numWins = new JLabel("");
+    numWins.setText(String.valueOf(intWins));
+
+    numLosses = new JLabel("");
+    numLosses.setText(String.valueOf(intLosses));
+
 
     add(name);
     add(inptName);
     add(wins);
-    add(inptWins);
+    add(numWins);
     add(losses);
-    add(inptLosses);
+    add(numLosses);
+
+
   }
+  public int setWins (int p2[])
+  {
+    intWins =p2[0];
+    return intWins;
+  }
+
+  public int setLosses (int []p2)
+  {
+    intLosses = p2[1];
+    return intLosses;
+  }
+
 
 }

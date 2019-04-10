@@ -1,3 +1,6 @@
+//Joan Aoanan and Aisha Burka
+//File: hangman.java
+
 import java.util.*;
 import javax.swing.JOptionPane;
 
@@ -7,7 +10,8 @@ public class hangman {
 
 //initializes string array
     String[] words = new String[]
-    { "hello", "encyclopedia","flamingo", "cellphone" };
+    { "hello", "encyclopedia","flamingo", "cellphone", "pineapple", "rock", "bicycle",
+    "cyclohexane", "barnacle", "onomatopoeia"};
 
     boolean validString;
     int menuChoice;
@@ -20,8 +24,6 @@ public class hangman {
     boolean win = false;
     boolean validInpt = true;
 
-// System.out.println (menuChoice);
-//    menuChoice =2;
 
 //OPTION 1
 //randomizes word in string
@@ -31,30 +33,32 @@ public class hangman {
     //randomly selects the string
       String rndmString;
       rndmString =randomString(words);
-      System.out.println(rndmString);
 
     //turns string into a character array
       length = lengthString(rndmString);
       char[] word = new char[length];
       convertString(rndmString, word, length);
-      //displayArray(word);
-
 
       char[] findWord = new char [length];
       setArray(findWord, length);
       displayArray(findWord, length);
 
+      //Start of the game
       while(strikes[0] != maxTries && win == false)
       {
         do
         {
           guess=inptGuess();
           validInpt = validCharInput(guess);
-        }while(!validInpt);
+        }while(!validInpt); //loop repeats till a letter is inputted
+
+        //converts uppercase to lowercase
         guess = convertLetter(guess);
 
         correct = compareGuess(word, findWord, length, guess);
+        //checks if guess is incorrect
         wrongGuess(findWord, strikes, correct, length, maxTries);
+        //checks if user wins
         win = checkWin(findWord, length);
       }
       gameResult(strikes, win, rndmString, maxTries);
@@ -67,32 +71,33 @@ public class hangman {
         String inptStrng;
         do
         {
-        inptStrng = userString();
-        validString = validInput(inptStrng);
-        } while(!validString);
+          inptStrng = userString();
+          validString = validInput(inptStrng);
+        } while(!validString); //loop repeats till a letter is inputted
+
         //converts string array to character
         length = lengthString(inptStrng);
         char[] word2 = new char[length];
         convertString(inptStrng, word2, length);
-        //displayArray(word2);
-
-        //CharacterGuess
-
 
         char[] findWord = new char [length];
         setArray(findWord, length);
         displayArray(findWord, length);
         while(strikes[0] != maxTries && win ==false)
         {
-        do
-        {
-          guess=inptGuess();
-          validInpt = validCharInput(guess);
-        }while(!validInpt);
+          do
+          {
+            guess=inptGuess();
+            validInpt = validCharInput(guess);
+          }while(!validInpt); //loop repeats till a letter is inputted
+
+          //converts uppercase to lowercase
         guess = convertLetter(guess);
 
         correct = compareGuess(word2, findWord, length, guess);
+        //checks if guess is incorrect
         wrongGuess(findWord, strikes, correct, length, maxTries);
+        //checks if user wins
         win = checkWin(findWord, length);
         }
         gameResult(strikes, win, inptStrng, maxTries);
@@ -113,12 +118,9 @@ else{}
     else{
       JOptionPane.showMessageDialog(null, "Congrats you guessed correctly! \n"
         + "You have " +strikes[0]+ " strikes");
-
       displayArray(findWord, length);
     }
   }
-
-
 
   public static char convertLetter (char charGuess)
     {
@@ -152,9 +154,9 @@ public static boolean validInput(String input)
     for (int i = 0; i < (input.length()); i++)
     {
       if (input.charAt(i) > 96 && input.charAt(i) < 123)
-          validInpt = true;
+        validInpt = true;
       else if (input.charAt(i) > 64 && input.charAt(i) < 91)
-          validInpt = true;
+        validInpt = true;
       else
         {
         JOptionPane.showMessageDialog( null, "Enter a valid letter" );
@@ -171,9 +173,9 @@ public static boolean validInput(String input)
       boolean validInpt = true;
       int intInput = input;
         if (intInput > 96 && intInput < 123)
-            validInpt = true;
+          validInpt = true;
         else if (intInput > 64 && intInput < 91)
-            validInpt = true;
+          validInpt = true;
         else
           {
           JOptionPane.showMessageDialog( null, "Enter a valid letter" );
@@ -183,15 +185,15 @@ public static boolean validInput(String input)
       return validInpt;
     }
 
-public static boolean checkWin(char[] findWord, int length)
-{
-  boolean win;
-  if (new String(findWord).contains("_"))
+  public static boolean checkWin(char[] findWord, int length)
+  {
+    boolean win;
+    if (new String(findWord).contains("_"))
     win = false;
-  else
-    win = true;
-  return win;
-}
+    else
+      win = true;
+    return win;
+  }
 
   public static void incorrect( boolean correct, int[] strikes)
   {
@@ -243,16 +245,6 @@ public static boolean checkWin(char[] findWord, int length)
     char charGuess;
     guess = JOptionPane.showInputDialog("What letter do you want to guess");
     charGuess = guess.charAt(0);
-/*
-    int intGuess = charGuess;
-
-    if(intGuess < 97)
-    {
-      intGuess += 32;
-      charGuess = (char)intGuess;
-    }
-    else {}
-    */
     return charGuess;
   }
 
@@ -270,18 +262,18 @@ public static boolean checkWin(char[] findWord, int length)
       inptStrng= JOptionPane.showInputDialog("Enter the  word you want a user to ask");
       return inptStrng;
     }
-
-public static void displayArray(char[] word, int length)
-{
-  String array = new String (word);
-  JOptionPane.showMessageDialog(null, "This word is " + length + " characters long \n"
-    + array);
-}
+  public static void displayArray(char[] word, int length)
+  {
+    String array = new String (word);
+    JOptionPane.showMessageDialog(null, "This word is " + length + " characters long \n"
+      + array);
+  }
 
   public static int lengthString(String word)
   {
     return word.length();
   }
+
   public static void convertString(String slctdString, char[] word, int length)
   {
     for (int i = 0; i < length; i++)
@@ -311,5 +303,4 @@ public static void displayArray(char[] word, int length)
     option = Integer.parseInt(selection);
     return option;
   }
-
 }

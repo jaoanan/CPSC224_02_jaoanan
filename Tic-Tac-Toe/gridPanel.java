@@ -22,6 +22,8 @@ public class gridPanel extends JPanel
   boolean hasWinner;
   public int[] p1 =new int[2];
   public int[] p2 = new int[2];
+  private P1 player1;
+  private P2 player2;
 
   //constructor
 
@@ -32,7 +34,7 @@ public class gridPanel extends JPanel
     currentPlayer ="x";
     board = new JButton[3][3];
     hasWinner = false;
-    initializeBoard();
+    initializeBoard(p1,p2);
 
 
     button1 = new JButton("New Game");
@@ -62,7 +64,8 @@ public class gridPanel extends JPanel
           }
       }
   }
-/*
+
+
   public int[] getP1Array()
   {
     return p1.clone();
@@ -72,7 +75,9 @@ public class gridPanel extends JPanel
   {
     return p2.clone();
   }
-  */
+
+
+
   private void turn()
   {
     if(currentPlayer.equals("x"))
@@ -81,7 +86,7 @@ public class gridPanel extends JPanel
         currentPlayer = "x";
   }
 
-  private void hasWinner()
+  private void hasWinner(int[] p1, int[] p2)
   {
     if(board[0][0].getText().equals(currentPlayer) && board [1][0].getText().equals(currentPlayer) && board [2][0].getText().equals(currentPlayer))
         {
@@ -124,6 +129,7 @@ public class gridPanel extends JPanel
           p2[1] = p2[1]+1;
 
           JOptionPane.showMessageDialog(null, "Player 1 has won");
+    
 
         }
 
@@ -138,7 +144,7 @@ public class gridPanel extends JPanel
       }
   }
 
-  public void initializeBoard()
+  public void initializeBoard(int p1[],int p2[])
   {
     board = new JButton[3][3];
 
@@ -161,7 +167,7 @@ public class gridPanel extends JPanel
             if(((JButton)e.getSource()).getText().equals("") && hasWinner == false)
             {
               btn.setText(currentPlayer);
-              hasWinner();
+              hasWinner(p1,p2);
               turn();
             }
           }
